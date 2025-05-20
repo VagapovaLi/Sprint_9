@@ -20,8 +20,8 @@ class TestTaxiOrder:
         main_page.open(urls.SITE_URL)
         main_page.set_input(Fsl.INPUT_FROM_ADDRESS, from_address)
         main_page.set_input(Fsl.INPUT_TO_ADDRESS, to_address)
-        main_page.click_fast_route()
-        main_page.click_button_call_taxi()
+        main_page.click_element(Fsl.MODE_FAST)
+        main_page.click_element(Fsl.BUTTON_CALL_TAXI)
         for tariff_type in [Fsl.WORKER_TARIFF, Fsl.SLEEPY_TARIFF,
                             Fsl.VACATION_TARIFF, Fsl.TALKATIVE_TARIFF,
                             Fsl.COMFORTING_TARIFF, Fsl.GLOSSY_TARIFF]:

@@ -23,7 +23,7 @@ class TestRouteSwitching:
         main_page.set_input(Fsl.INPUT_TO_ADDRESS, to_address)
         optimal_text = main_page.get_element_text(Fsl.TEXT_RESULT_SEARCH)
         optimal_duration = main_page.get_element_text(Fsl.DURATION_RESULT_SEARCH)
-        main_page.click_optimal_route()
+        main_page.click_element(Fsl.MODE_OPTIMAL)
 
         assert main_page.is_tab_active_route(Fsl.MODE_OPTIMAL), "Таб оптимальный маршрута не активен"
         assert (optimal_text != main_page.get_element_text(Fsl.TEXT_RESULT_SEARCH)
@@ -42,7 +42,7 @@ class TestRouteSwitching:
         main_page.open(urls.SITE_URL)
         main_page.set_input(Fsl.INPUT_FROM_ADDRESS, from_address)
         main_page.set_input(Fsl.INPUT_TO_ADDRESS, to_address)
-        main_page.click_mine_route()
+        main_page.click_element(Fsl.MODE_CUSTOM)
 
         assert main_page.is_tab_active_route(Fsl.MODE_CUSTOM), "Таб пользовательского маршрута не активен"
         for transport_type in [Fsl.TRANSPORT_CAR, Fsl.TRANSPORT_WALK,
@@ -63,8 +63,8 @@ class TestRouteSwitching:
         main_page.open(urls.SITE_URL)
         main_page.set_input(Fsl.INPUT_FROM_ADDRESS, from_address)
         main_page.set_input(Fsl.INPUT_TO_ADDRESS, to_address)
-        main_page.click_fast_route()
-        main_page.click_button_call_taxi()
+        main_page.click_element(Fsl.MODE_FAST)
+        main_page.click_element(Fsl.BUTTON_CALL_TAXI)
 
         for tariff_type in [Fsl.WORKER_TARIFF, Fsl.SLEEPY_TARIFF,
                             Fsl.VACATION_TARIFF, Fsl.TALKATIVE_TARIFF,
@@ -82,10 +82,9 @@ class TestRouteSwitching:
         main_page.open(urls.SITE_URL)
         main_page.set_input(Fsl.INPUT_FROM_ADDRESS, from_address)
         main_page.set_input(Fsl.INPUT_TO_ADDRESS, to_address)
-        main_page.click_mine_route()
-        print(4)
-        main_page.click_type_of_movement_drive()
-        main_page.click_book_drive()
+        main_page.click_element(Fsl.MODE_CUSTOM)
+        main_page.click_element(Fsl.TRANSPORT_DRIVE)
+        main_page.click_element(Fsl.BUTTON_RESERVATION_DRIVE)
         for tariff_type in [Fsl.EVERYDAY_TARIFF, Fsl.CAMPING_TARIFF,
                             Fsl.LUXURY_TARIFF]:
             assert main_page.check_is_displayed(

@@ -96,3 +96,9 @@ class FormSearchLocators:
     PAYMENT_METHOD = (By.XPATH, "//div[contains(@class, 'pp-button') and .//div[contains(text(), 'Способ оплаты')]]")
     COMMENT_FIELD = (By.XPATH, "//input[@id='comment']")
     REQUIREMENTS_SECTION = (By.XPATH, "//div[contains(@class, 'reqs-header')]")
+
+
+    # Требования к заказу
+    REQUIREMENTS_HEADER = (By.CSS_SELECTOR, ".reqs-header")
+    LAPTOP_TABLE_SWITCH = (
+    By.XPATH, "//div[contains(@class, 'r-sw-label') and text()='Столик для ноутбука']/following-sibling::div//span")
