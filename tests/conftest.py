@@ -1,26 +1,17 @@
 import pytest
 from selenium import webdriver
-
-from data import Data
-
-from pages.main_page import MainPage
+import allure
 
 
-@pytest.fixture()
+@pytest.fixture
 def driver():
-    driver = webdriver.Chrome()
-    driver.get(Data.SITE_URL)
-    yield driver
-    driver.quit()
-
-@pytest.fixture()
-def main_page(driver):
-    return MainPage(driver)
-
-
-@pytest.fixture()
-def main_page_set_trip(driver):
-    main_page = MainPage(driver)
-    main_page.type_route("Хамовнический Вал, 34", "Зубовский бульвар, 37")
-    main_page.click_button_call_taxi()
-    return main_page
+    """Фикстура для создания драйвера Chrome в headless-режиме."""
+    with allure.step("Создаём драйвер Chrome в headless-режиме"):
+        chrome_options = webdriver.ChromeOptions()  # создали объект для опций
+        #chrome_options.add_argument('--headless=new')  # Запускает Chrome в безголовом режиме (без графического интерфейса)
+        chrome_options.add_argument('--no-sandbox')  # Отключает песочницу (sandbox) Chrome
+        chrome_options.add_argument('--disable-gpu')  # Отключает GPU-рендеринг
+        driver = webdriver.Chrome(options=chrome_options)  # Создали драйвер и передали в него настройки
+        driver.set_window_size(1920, 1080)
+        yield driver
+        driver.quit()
