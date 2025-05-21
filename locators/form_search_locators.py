@@ -60,7 +60,7 @@ class FormSearchLocators:
     GLOSSY_TOOLTIP_ICON = (
     By.XPATH, "//div[contains(@class, 'tcard') and .//div[text()='Глянцевый']]//button[contains(@class, 'tcard-i')]")
 
-    # Локаторы для тултипов тарифов
+
     # Локаторы для конкретных тултипов по названию тарифа
     WORKER_TOOLTIP = (By.XPATH,
                       "//div[contains(@class, 'tcard') and .//div[text()='Рабочий']]//following-sibling::div[contains(@class, '__react_component_tooltip')]")
@@ -74,7 +74,8 @@ class FormSearchLocators:
                           "//div[contains(@class, 'tcard') and .//div[text()='Утешительный']]//following-sibling::div[contains(@class, '__react_component_tooltip')]")
     GLOSSY_TOOLTIP = (By.XPATH,
                       "//div[contains(@class, 'tcard') and .//div[text()='Глянцевый']]//following-sibling::div[contains(@class, '__react_component_tooltip')]")
-    # Заголовки тултипов (i-title)
+
+    # Заголовки тултипов
     WORKER_TOOLTIP_TITLE = (By.XPATH, "//div[contains(@id, 'tariff-card-0')]//div[contains(@class, 'i-title')]")
     SLEEPY_TOOLTIP_TITLE = (By.XPATH, "//div[contains(@id, 'tariff-card-1')]//div[contains(@class, 'i-title')]")
     VACATION_TOOLTIP_TITLE = (By.XPATH, "//div[contains(@id, 'tariff-card-2')]//div[contains(@class, 'i-title')]")
@@ -102,3 +103,6 @@ class FormSearchLocators:
     REQUIREMENTS_HEADER = (By.CSS_SELECTOR, ".reqs-header")
     LAPTOP_TABLE_SWITCH = (
     By.XPATH, "//div[contains(@class, 'r-sw-label') and text()='Столик для ноутбука']/following-sibling::div//span")
+
+    # Стоимость поездки по тарифу
+    WORKER_TARIFF_PRICE = (By.XPATH, "//div[contains(@class, 'tcard active')]//div[contains(@class, 'tcard-price')]")

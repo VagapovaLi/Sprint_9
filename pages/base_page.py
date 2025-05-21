@@ -29,7 +29,7 @@ class BasePage:
             print(f"Элемент с локатором {locator} не был найден за отведенное время.")
             raise
 
-    # Метод ждущий по локатору когда элемент станет кликабельным
+    # Метод ждущий когда элемент станет кликабельным
     @allure.step('Ждем когда элемент {locator} станет кликабельным')
     def wait_for_click(self, locator):
         try:
@@ -42,15 +42,12 @@ class BasePage:
     def find_elements(self, locator):
 
         try:
-            # Пытаемся найти элементы с явным ожиданием
             elements = WebDriverWait(self.driver, self.timeout).until(EC.presence_of_element_located(locator))
-
             return elements
         except TimeoutException:
-            # Если элементы не найдены, возвращаем пустой список
             return []
 
-    # Открыть браузер
+
     @allure.step('Открываем страницу {url}')
     def open(self, url):
         self.driver.get(url)
@@ -70,11 +67,6 @@ class BasePage:
             is_displayed = self.driver.find_element(*locator).is_displayed()
             return is_displayed
         except TimeoutException:
-            # allure.attach(
-            #     body=self.driver.get_screenshot_as_png(),
-            #     name="screenshot",
-            #     attachment_type=allure.attachment_type.PNG
-            # )
             return False
 
     @allure.step('Достаем текст элемента по локатору {locator}')
@@ -100,3 +92,8 @@ class BasePage:
         """Наводит курсор на указанный элемент"""
         element = self.find_element(locator)
         ActionChains(self.driver).move_to_element(element).perform()
+
+    @allure.step("Дождаться исчезновения элемента")
+    def wait_for_invisibility(self, locator, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            EC.invisibility_of_element_located(locator))

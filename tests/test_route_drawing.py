@@ -11,7 +11,7 @@ from locators.form_search_locators import FormSearchLocators as Fsl
 class TestRouteFunctionality:
 
     @allure.story("Отображение точек маршрута на карте")
-    @allure.title("Проверка отображения точек маршрута для разных адресов")
+    @allure.title("Отображения точек маршрута для разных адресов")
     @pytest.mark.parametrize("from_address,to_address", [
         ("Хамовнический Вал, 34", "Зубовский бульвар, 37"),
         ("Зубовский бульвар, 37", "Хамовнический Вал, 34")

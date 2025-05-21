@@ -12,7 +12,7 @@ class MainPage(BasePage):
 
 
     @allure.step('Проверяем активность таба тарифа')
-    def is_tab_active_route(self, locator):
+    def active_tariff_tab(self, locator):
         tab = self.find_element(locator)
         return "active" in tab.get_attribute("class")
 
@@ -32,3 +32,7 @@ class MainPage(BasePage):
             "title": self.get_element_text(title),
             "description": self.get_element_text(description)
         }
+
+    @allure.step('Нормализация данных')
+    def normalize_price(self, price):
+        return ''.join(filter(lambda x: x.isdigit(), price))

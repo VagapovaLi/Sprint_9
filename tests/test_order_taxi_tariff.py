@@ -10,12 +10,12 @@ from locators.form_search_locators import FormSearchLocators as Fsl
 class TestTaxiOrder:
 
     @allure.story("Проверка тарифов")
-    @allure.title("Проверка формы заказа такси с разными адресами")
+    @allure.title("Заказа такси с разными адресами")
     @pytest.mark.parametrize("from_address,to_address", [
         ("Хамовнический Вал, 34", "Зубовский бульвар, 37"),
         ("Зубовский бульвар, 37", "Хамовнический Вал, 34")
     ])
-    def test_taxi_order_with_tariffs_check(self, driver, from_address, to_address):
+    def test_taxi_order_with_different_addresses(self, driver, from_address, to_address):
         main_page = MainPage(driver)
         main_page.open(urls.SITE_URL)
         main_page.set_input(Fsl.INPUT_FROM_ADDRESS, from_address)
@@ -33,9 +33,9 @@ class TestTaxiOrder:
 
 
     @allure.story("Проверка тарифов")
-    @allure.title("Проверка всплывающих подсказок тарифов")
+    @allure.title("Всплывающих подсказок тарифов")
     @pytest.mark.xfail(reason="Перепутаны тултипы тарифов Сонный и Разговорный")
-    def test_tariff_tooltips(self, driver):
+    def test_tariff_popup_tooltips(self, driver):
         main_page = MainPage(driver)
         main_page.open(urls.SITE_URL)
         main_page.prepare_taxi_order()
@@ -92,19 +92,16 @@ class TestTaxiOrder:
 
         }
         for tariff, tooltip in tariffs_with_expected_tooltips.items():
-        #     with
-        # allure.step(f"Проверяем тултип для тарифа {tooltip['title']}"):
             main_page.click_element(tariff)
             main_page.hover_over_element(tooltip['icon'])
             assert main_page.check_is_displayed(tooltip['tooltip']), "Тултип не отобразился"
-
             tooltip_data = main_page.get_tooltip_text(tooltip['title'], tooltip['description'])
             assert tooltip["title_ex"] in tooltip_data["title"], "Неверный заголовок тултипа"
             assert tooltip_data["description"] in tooltip["description_ex"], f"Неверное описание тултипа {tooltip['title']}"
 
     @allure.story("Проверка формы заказа")
     @allure.title("Проверка полей формы заказа такси")
-    def test_order_form_fields(self, driver):
+    def test_taxi_order_form_fields(self, driver):
         main_page = MainPage(driver)
         main_page.open(urls.SITE_URL)
         main_page.prepare_taxi_order()

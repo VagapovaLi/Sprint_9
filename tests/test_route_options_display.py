@@ -11,12 +11,12 @@ from locators.form_search_locators import FormSearchLocators as Fsl
 class TestRouteOptionsDisplay:
 
     @allure.story("Отображение блока маршрута")
-    @allure.title("Проверка отображения блока маршрута для разных адресов")
+    @allure.title("Отображения блока маршрута для разных адресов")
     @pytest.mark.parametrize("from_address,to_address", [
         ("Хамовнический Вал, 34", "Зубовский бульвар, 37"),
         ("Зубовский бульвар, 37", "Хамовнический Вал, 34")
     ], ids=["From Хамовнический to Зубовский", "From Зубовский to Хамовнический"])
-    def test_add_route_shows_block_with_route_selection(self, driver, from_address, to_address):
+    def test_display_route_block_for_different_addresses(self, driver, from_address, to_address):
         main_page = MainPage(driver)
         main_page.open(urls.SITE_URL)
         main_page.set_input(Fsl.INPUT_FROM_ADDRESS, from_address)
@@ -34,7 +34,7 @@ class TestRouteOptionsDisplay:
         ("Зубовский бульвар, 37", "Зубовский бульвар, 37")
     ], ids=["Same address Хамовнический", "Same address Зубовский"])
 
-    def test_route_block_for_same_address(self, driver, from_address, to_address):
+    def test_display_route_block_for_identical_addresses(self, driver, from_address, to_address):
         text_search = "Авто Бесплатно"
         duration_search = "В пути 0 мин."
         main_page = MainPage(driver)
